@@ -31,7 +31,6 @@ for (const command of commands) {
             }
         }
     } else if (c[0] === 'dir') {
-        let temp = `${path.join('')}${c[1]}`;
         if (!pathSizes.has(`${path.join('')}${c[1]}`)) {
             pathSizes.set(`${path.join('')}${c[1]}`, 0);
         }
