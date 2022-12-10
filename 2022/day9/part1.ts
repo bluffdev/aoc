@@ -5,18 +5,18 @@ const motions = readFileSync('./2022/day9/input.txt', 'utf-8')
     .filter((n) => n !== '');
 
 type pos = {
-    r: number;
-    c: number;
+    x: number;
+    y: number;
 };
 
-let head = { r: 0, c: 0 } as pos;
-let tail = { r: 0, c: 0 } as pos;
+let head = { x: 0, y: 0 } as pos;
+let tail = { x: 0, y: 0 } as pos;
 
 function isTouching(head: pos, tail: pos) {
     return (
-        Math.abs(head.r - tail.r) + Math.abs(head.c - tail.c) === 1 ||
-        (Math.abs(head.r - tail.r) === 1 && Math.abs(head.c - tail.c) === 1) ||
-        (head.r === tail.r && head.c === tail.c)
+        Math.abs(head.x - tail.x) + Math.abs(head.y - tail.y) === 1 ||
+        (Math.abs(head.x - tail.x) === 1 && Math.abs(head.y - tail.y) === 1) ||
+        (head.x === tail.x && head.y === tail.y)
     );
 }
 
@@ -26,26 +26,26 @@ for (const motion of motions) {
     const [dir, amount] = motion.split(' ');
 
     for (let i = 0; i < Number(amount); i++) {
-        let prev = { r: head.r, c: head.c } as pos;
+        let prev = { x: head.x, y: head.y } as pos;
         switch (dir) {
             case 'U':
-                head.r -= 1;
+                head.y += 1;
                 break;
             case 'D':
-                head.r += 1;
+                head.y -= 1;
                 break;
             case 'L':
-                head.c -= 1;
+                head.x -= 1;
                 break;
             case 'R':
-                head.c += 1;
+                head.x += 1;
                 break;
         }
 
         if (!isTouching(head, tail)) {
-            tail.r = prev.r;
-            tail.c = prev.c;
-            visited.add(`${tail.r},${tail.c}`);
+            tail.x = prev.x;
+            tail.y = prev.y;
+            visited.add(`${tail.x},${tail.y}`);
         }
     }
 }
